@@ -31,14 +31,14 @@ class MonitoringStation:
         self.level_history = None
 
     def __repr__(self):
-        d = "Station name:     {}\n".format(self.name)
+        d =  "Station name:     {}\n".format(self.name)
         d += "   id:            {}\n".format(self.station_id)
         d += "   measure id:    {}\n".format(self.measure_id)
         d += "   coordinate:    {}\n".format(self.coord)
         d += "   town:          {}\n".format(self.town)
         d += "   river:         {}\n".format(self.river)
         d += "   typical range: {}\n".format(self.typical_range)
-        d += "   average value: {}".format(self.average_value)
+        d += "   average value: {}\n".format(self.average_value)
         return d
 
     def typical_range_consistent(self):
