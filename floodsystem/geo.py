@@ -16,11 +16,11 @@ from floodsystem.stationdata import build_station_list
 def stations_by_distance(stations, p):
     """This function creates tuples with station name and distance from p"""
     stations = build_station_list()
+    tuples = []
     for station in stations:
-        names = station.name
-        coords = MonitoringStation.coord
-        distance = haversine(p, station.cord)
-    tuples = list(zip(names, distance))
+        coords = station.coord
+        distance = haversine(p, station.coord)
+        tuples.append((station.name, distance))
     tuples = sorted_by_key(tuples, 1)
     return tuples
 
