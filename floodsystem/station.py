@@ -58,4 +58,4 @@ def inconsistent_typical_range_stations(stations,reverse = False):
     if not reverse:
         return inconsistent_station_list
     else:
-        return consistent_station_list
+        return consistent_station_list 

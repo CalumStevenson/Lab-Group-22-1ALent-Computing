@@ -37,6 +37,7 @@ def fetch_station_list_levels(stations,dt,N):
 	Stations = []
 	erroneousStations = []
 	stations = inconsistent_typical_range_stations(stations,True)
+	print(stations)
 	for station in tqdm(stations, desc = "Loading: "):
 		try:
 			dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=dt))
@@ -44,8 +45,11 @@ def fetch_station_list_levels(stations,dt,N):
 			station.level_history = (dates,levels)
 			stations.append((station,station.latest_level-station.average_value))
 		except:
-			print(f"erroneous data for stations: {station.name}")
-			erroneousStations.append(station)
+			try:
+				print(f"erroneous data for stations: {station.name}")
+				erroneousStations.append(station)
+			except:
+				print('unknown error of',station)
 	print(len(erroneousStations))
 	Stations = sorted_by_key(Stations,1,True)
 	topStations = Stations[:N]
