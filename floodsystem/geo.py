@@ -6,6 +6,7 @@ geographical data.
 
 """
 
+from re import X
 from .utils import sorted_by_key # noqa
 
 from haversine import haversine
@@ -23,6 +24,17 @@ def stations_by_distance(stations, p):
         tuples.append((station.name, distance))
     tuples = sorted_by_key(tuples, 1)
     return tuples
+
+def stations_within_radius(stations, centre, r):
+    """This function returns a list of all stations within radius r of a geographic coordinate x."""
+    stations = build_station_list()
+    close_stations = []
+    for station in stations:
+        coords = station.coord
+        distance = haversine(centre, station.coord)
+        if distance < r:
+            close_stations.append(station.name)
+    return close_stations
 
 def rivers_with_station(stations):
     """This function creates a set containing all the river names which have a station on it. 
