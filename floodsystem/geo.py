@@ -6,7 +6,23 @@ geographical data.
 
 """
 
-from .utils import sorted_by_key  # noqa
+from .utils import sorted_by_key # noqa
+
+from haversine import haversine
+from . import datafetcher
+from .station import MonitoringStation
+from floodsystem.stationdata import build_station_list
+
+def stations_by_distance(stations, p):
+    """This function creates tuples with station name and distance from p"""
+    stations = build_station_list()
+    for station in stations:
+        names = station.name
+        coords = MonitoringStation.coord
+        distance = haversine(p, station.cord)
+    tuples = list(zip(names, distance))
+    tuples = sorted_by_key(tuples, 1)
+    return tuples
 
 def rivers_with_station(stations):
     """This function creates a set containing all the river names which have a station on it. 
