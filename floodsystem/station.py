@@ -47,9 +47,15 @@ class MonitoringStation:
                 return True
         return False
 
-def inconsistent_typical_range_stations(stations):
+def inconsistent_typical_range_stations(stations,reverse = False):
     inconsistent_station_list = []
+    consistent_station_list = []
     for station in stations:
         if not station.typical_range_consistent():
             inconsistent_station_list.append(station)
-    return inconsistent_station_list
+        else:
+            consistent_station_list.append(station)
+    if not reverse:
+        return inconsistent_station_list
+    else:
+        return consistent_station_list
