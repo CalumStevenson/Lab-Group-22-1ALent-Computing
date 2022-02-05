@@ -17,12 +17,8 @@ def test_rivers_by_distance():
         distance = haversine(p, station.coord)
         tuples.append((station.name, distance))
     tuples = sort(tuples, 1)
-    close = tuples[:10]
-    far = tuples[-10:]
-    closest = close[0]
-    farthest = far[9]
+    closest = tuples[0]
     assert closest[1] == 0.840237595667494
-    assert farthest[1] == 440.00325604140033
 
 #def test_rivers_within_radius():
     #stations = build_station_list()
