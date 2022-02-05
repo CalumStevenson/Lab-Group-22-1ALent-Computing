@@ -16,6 +16,8 @@ def test_rivers_by_distance():
     p = 52.2053, 0.1218
     for station in stations:
         coords = station.coord
+        assert coords
+        assert coords == station.coord
         distance = haversine(p, station.coord)
         tuples.append((station.name, distance))
     tuples = sorted_by_key(tuples, 1)
@@ -29,6 +31,7 @@ def test_rivers_within_radius():
     close_stations = []
     for station in stations:
         coords = station.coord
+        assert coords
         distance = haversine(centre, station.coord)
         if distance < r:
             close_stations.append(station.name)
