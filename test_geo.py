@@ -22,16 +22,18 @@ def test_rivers_by_distance():
     closest = tuples[0]
     assert closest[1] == 0.840237595667494
 
-#def test_rivers_within_radius():
-    #stations = build_station_list()
-    #rivers = rivers_with_station(stations)
-    #Cam = None
-    #for river in rivers:
-     #   if river == "River Cam":
-      #      Cam = river
-       #     break
-    #assert Cam
-    #assert len(rivers) <= len(stations)
+def test_rivers_within_radius():
+    stations = build_station_list()
+    centre = 52.2053, 0.1218
+    r = 10
+    close_stations = []
+    for station in stations:
+        coords = station.coord
+        distance = haversine(centre, station.coord)
+        if distance < r:
+            close_stations.append(station.name)
+    close_stations.sort()
+    assert close_stations[0] == 'Bin Brook'
 
 def test_rivers_with_station():
     stations = build_station_list()
