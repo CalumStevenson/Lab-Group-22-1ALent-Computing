@@ -8,6 +8,8 @@ from floodsystem.stationdata import build_station_list
 from floodsystem.station import MonitoringStation
 from haversine import haversine
 
+from floodsystem.utils import sorted_by_key
+
 def test_rivers_by_distance():
     stations = build_station_list()
     tuples = []
@@ -16,7 +18,7 @@ def test_rivers_by_distance():
         coords = station.coord
         distance = haversine(p, station.coord)
         tuples.append((station.name, distance))
-    tuples = sort(tuples, 1)
+    tuples = sorted_by_key(tuples, 1)
     closest = tuples[0]
     assert closest[1] == 0.840237595667494
 
