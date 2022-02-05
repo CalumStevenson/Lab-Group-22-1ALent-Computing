@@ -19,8 +19,10 @@ def test_rivers_by_distance():
     tuples = sort(tuples, 1)
     close = tuples[:10]
     far = tuples[-10:]
-    assert close[1] == ('Cambridge Jesus Lock', 0.840237595667494)
-    assert far[1] == ('Boscadjack', 440.00325604140033)
+    closest = close[0]
+    farthest = far[9]
+    assert closest[1] == 0.840237595667494
+    assert farthest[1] == 440.00325604140033
 
 #def test_rivers_within_radius():
     #stations = build_station_list()
