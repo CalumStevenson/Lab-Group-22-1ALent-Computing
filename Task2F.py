@@ -2,13 +2,14 @@ import floodsystem.stationdata
 import floodsystem.datafetcher
 import floodsystem.analysis
 import floodsystem.plot
+import floodsystem.utils
 import datetime
 
 
 
 stations = floodsystem.stationdata.build_station_list()
-'''
-topFive = fetch_station_list_levels(stations,2,5)
+
+topFive = floodsystem.utils.fetch_station_list_levels(stations,2,5)
 for station in topFive:
     poly, d0 = floodsystem.analysis.polyfit(station.level_history[0],station.level_history[1],4)
     floodsystem.plot.plot_water_levels(station,station.level_history[0],station.level_history[1],poly)
@@ -20,4 +21,4 @@ station.latest_level = levels[0]
 station.level_history = (dates,levels)
 poly, d0 = floodsystem.analysis.polyfit(station.level_history[0],station.level_history[1],4)
 print(poly)
-#floodsystem.plot.plot_water_levels(station,station.level_history[0],station.level_history[1],poly)
+floodsystem.plot.plot_water_levels(station,station.level_history[0],station.level_history[1],poly)'''
