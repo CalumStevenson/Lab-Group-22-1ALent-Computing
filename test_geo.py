@@ -59,7 +59,7 @@ def test_stations_by_river():
             assert type(river) == str
             assert type(RiverDictionary[river]) == list
             for i in RiverDictionary[river]:
->               assert type(i) == str
+               assert type(i) == str
 
 def test_rivers_by_station_number():
     stations = build_station_list()
