@@ -6,8 +6,6 @@ def run():
     List = station.inconsistent_typical_range_stations(stations)
     print(List)
     ListOfNames = []
-    for Station in List:
-        ListOfNames.append(Station.name)
     print(ListOfNames)
 
 if __name__ == '__main__':
