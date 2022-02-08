@@ -50,16 +50,16 @@ def test_rivers_with_station():
     assert len(rivers) <= len(stations)
 
 def test_stations_by_river():
-    stations = build_station_list()
-    RiverDictionary = stations_by_river(stations)
-    rivers = rivers_with_station(stations)
-    assert len(rivers) == len(RiverDictionary)
-    assert type(RiverDictionary) == dict
-    for river in RiverDictionary:
-        assert type(river) == str
-        assert type(RiverDictionary[river]) == list
-        for i in RiverDictionary[river]:
-            assert type(i) == MonitoringStation
+        stations = build_station_list()
+        RiverDictionary = stations_by_river(stations)
+        rivers = rivers_with_station(stations)
+        assert len(rivers) == len(RiverDictionary)
+        assert type(RiverDictionary) == dict
+        for river in RiverDictionary:
+            assert type(river) == str
+            assert type(RiverDictionary[river]) == list
+            for i in RiverDictionary[river]:
+>               assert type(i) == str
 
 def test_rivers_by_station_number():
     stations = build_station_list()
