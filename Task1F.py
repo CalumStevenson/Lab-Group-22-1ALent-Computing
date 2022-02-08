@@ -5,8 +5,6 @@ def run():
     stations = stationdata.build_station_list()
     List = station.inconsistent_typical_range_stations(stations)
     print(List)
-    ListOfNames = []
-    print(ListOfNames)
-
+    print(f"Number of inconsistent stations: {len(List)}")
 if __name__ == '__main__':
     run()
