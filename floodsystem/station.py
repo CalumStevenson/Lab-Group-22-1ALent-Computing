@@ -5,7 +5,10 @@
 for manipulating/modifying station data
 
 """
-
+from turtle import update
+from . import datafetcher
+import datetime
+from tqdm import tqdm
 
 class MonitoringStation:
     """This class represents a river level monitoring station"""
@@ -43,11 +46,18 @@ class MonitoringStation:
         d += "   relative level: {}\n".format(self.relative_level)
         return d
 
-    def typical_range_consistent(self):
+    def typical_range_consistent(self,advanced):
+
         if self.typical_range != None:
-            if self.typical_range[0]<self.typical_range[1]:               
-                return True
+            if self.typical_range[0]<self.typical_range[1] and self.typical_range[0]>=0 and self.typical_range[1]>=0: 
+                if not advanced:              
+                    return True
+                else:
+                    dates,levels = datafetcher.fetch_measure_levels(self.measure_id,dt = datetime.timedelta(days = 2))
+                    if len(dates) > 1 and len(levels)>1:
+                        return True
         return False
+
     def relative_water_level(self):
         low, high = self.typical_range[0], self.typical_range[1]
         if self.latest_level!=None:
@@ -58,11 +68,11 @@ class MonitoringStation:
         self.relative_level = 0
         return 0
 
-def inconsistent_typical_range_stations(stations,reverse = False):
+def inconsistent_typical_range_stations(stations,reverse = False,advanced = False):
     inconsistent_station_list = []
     consistent_station_list = []
-    for station in stations:
-        A = station.typical_range_consistent()
+    for station in tqdm(stations,desc = "Loading advanced inconsistent stations: "):
+        A = station.typical_range_consistent(advanced)
         if not A:
             inconsistent_station_list.append(station.name)
         else:

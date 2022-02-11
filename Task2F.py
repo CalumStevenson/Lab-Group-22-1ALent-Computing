@@ -10,7 +10,6 @@ def run():
     stations = floodsystem.stationdata.build_station_list()
 
     topFive = floodsystem.utils.fetch_station_list_levels(stations,2,5)
-    print(len(topFive))
     for station in topFive:
         poly, d0 = floodsystem.analysis.polyfit(station.level_history[0],station.level_history[1],4)
         floodsystem.plot.plot_water_level_with_fit(station,station.level_history[0],station.level_history[1],poly)
