@@ -29,6 +29,7 @@ class MonitoringStation:
         self.average_value = (self.typical_range[1] + self.typical_range[0])/2  # I put this in so there is a easier way of doing EX 2E
         self.latest_level = None
         self.level_history = None
+        self.relative_level = None
 
     def __repr__(self):
         d =  "Station name:     {}\n".format(self.name)
@@ -39,22 +40,29 @@ class MonitoringStation:
         d += "   river:         {}\n".format(self.river)
         d += "   typical range: {}\n".format(self.typical_range)
         d += "   average value: {}\n".format(self.average_value)
+        d += "   relative level: {}\n".format(self.relative_level)
         return d
 
     def typical_range_consistent(self):
         if self.typical_range != None:
-            if self.typical_range[0]<self.typical_range[1]:
-                
+            if self.typical_range[0]<self.typical_range[1]:               
                 return True
-        print(self.typical_range)
         return False
+    def relative_water_level(self):
+        low, high = self.typical_range[0], self.typical_range[1]
+        if self.latest_level!=None:
+            level = self.latest_level-low
+            self.relative_level = level/high
+            return level/high
+        print(f"No latest level found for station: {self.name}")
+        self.relative_level = 0
+        return 0
 
 def inconsistent_typical_range_stations(stations,reverse = False):
     inconsistent_station_list = []
     consistent_station_list = []
     for station in stations:
         A = station.typical_range_consistent()
-        print(A)
         if not A:
             inconsistent_station_list.append(station.name)
         else:
