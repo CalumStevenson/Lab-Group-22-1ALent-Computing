@@ -1,8 +1,10 @@
 """Unit test for the utils module"""
 
+from distutils.command.build import build
 import floodsystem.utils
-
-
+from floodsystem.stationdata import build_station_list
+from floodsystem.utils import fetch_station_list_levels
+from floodsystem.station import MonitoringStation
 def test_sort():
     """Test sort container by specific index"""
 
@@ -55,3 +57,18 @@ def test_reverse_sort():
     assert list1[0] == c
     assert list1[1] == a
     assert list1[2] == b
+
+def test_fetch_station_list_levels():
+    stations = build_station_list()
+    stations = stations[:10]
+    top2Stations = fetch_station_list_levels(stations,1,2)
+    top5Stations = fetch_station_list_levels(stations,1,5)
+    assert top2Stations
+    assert top5Stations
+    assert type(top2Stations) == list
+    assert type(top5Stations) == list
+    assert len(top2Stations)<= len(top5Stations)
+    for i in top2Stations:
+        assert type(i) ==MonitoringStation
+    for i in top5Stations:
+        assert type(i) == MonitoringStation

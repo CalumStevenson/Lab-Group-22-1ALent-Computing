@@ -82,3 +82,7 @@ def inconsistent_typical_range_stations(stations,reverse = False,advanced = Fals
         return inconsistent_station_list
     else:
         return consistent_station_list 
+
+def set_relative_water_levels(stations):
+    for station in tqdm(stations, desc = "Setting relative water levels"):
+        station.relative_water_level()

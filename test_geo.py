@@ -10,7 +10,7 @@ from haversine import haversine
 
 from floodsystem.utils import sorted_by_key
 
-def test_rivers_by_distance():
+def test_stations_by_distance():
     stations = build_station_list()
     tuples = []
     p = 52.2053, 0.1218
@@ -24,7 +24,7 @@ def test_rivers_by_distance():
     closest = tuples[0]
     assert closest[1] == 0.840237595667494
 
-def test_rivers_within_radius():
+def test_stations_within_radius():
     stations = build_station_list()
     centre = 52.2053, 0.1218
     r = 10

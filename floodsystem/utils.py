@@ -53,7 +53,7 @@ def fetch_station_list_levels(stations,dt,N):
 	topStations = Stations[:N]
 	j = N
 	
-	while (Stations[j-1][1] == Stations[j][1]) and len(topStations)<len(Stations):
+	while len(topStations)<len(Stations) and(Stations[j-1][1] == Stations[j][1]):
 		topStations.append(Stations[j])
 		j+=1
 	topNStations = []

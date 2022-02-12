@@ -8,7 +8,10 @@ def stations_level_over_threshold(stations,tol):
                 list.append((station,relative))
         except:
             print(f"Unknown error for station: {station}")
-    list = sorted_by_key(list,1,True)
+    if len(list)>0:
+        list = sorted_by_key(list,1,True)
+    else:
+        list = []
     return list
 def stations_highest_rel_level(stations,N):
     List = []
