@@ -12,7 +12,6 @@ from tqdm import tqdm
 
 def run():
     stations = build_station_list()
-    stations = stations[:10]
     stations = inconsistent_typical_range_stations(stations,True,True)
     update_water_levels(stations)
     topStations = stations_highest_rel_level(stations,5)
