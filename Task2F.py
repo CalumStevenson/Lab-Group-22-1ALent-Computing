@@ -12,10 +12,10 @@ from tqdm import tqdm
 
 def run():
     stations = build_station_list()
+    stations = stations[:10]
     stations = inconsistent_typical_range_stations(stations,True,True)
     update_water_levels(stations)
     topStations = stations_highest_rel_level(stations,5)
-    print(topStations)
     for item in tqdm(topStations, desc= "Loading plots for Task 2E: "):
         station = item[0]
         dates,levels = fetch_measure_levels(station.measure_id,dt = datetime.timedelta(days = 10))
