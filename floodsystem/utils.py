@@ -63,7 +63,7 @@ def fetch_station_list_levels(stations,dt,N):
 		topNStations.append(i[0])
 	return topNStations
 
-def assess_flood_risk(stations,Med = False,Low = False):
+def assess_flood_risk(stations):
 	update_water_levels(stations)
 	set_relative_water_levels(stations)
 	HighThreshold = 1.1

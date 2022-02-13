@@ -5,6 +5,7 @@ import floodsystem.utils
 from floodsystem.stationdata import build_station_list
 from floodsystem.utils import fetch_station_list_levels
 from floodsystem.station import MonitoringStation
+from floodsystem.utils import assess_flood_risk
 def test_sort():
     """Test sort container by specific index"""
 
@@ -72,3 +73,14 @@ def test_fetch_station_list_levels():
         assert type(i) ==MonitoringStation
     for i in top5Stations:
         assert type(i) == MonitoringStation
+
+def test_assess_flood_risk():
+    stations = build_station_list()
+    stations = stations[:100]
+    Risk = assess_flood_risk(stations)
+    assert type(Risk) == list
+    if len(Risk)>0:
+        for i in Risk:
+            assert type(i) == tuple
+            assert type(i[0]) == str
+            assert i[1] == "High Risk" or i[1] == "Medium Risk" or i[1] == "Low Risk"
