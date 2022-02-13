@@ -3,6 +3,8 @@ from numpy import sort
 from tqdm import tqdm
 from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.station import inconsistent_typical_range_stations
+from floodsystem.stationdata import update_water_levels
+from floodsystem.station import set_relative_water_levels
 # Copyright (C) 2018 Garth N. Wells
 #
 # SPDX-License-Identifier: MIT
@@ -60,3 +62,25 @@ def fetch_station_list_levels(stations,dt,N):
 	for i in topStations:
 		topNStations.append(i[0])
 	return topNStations
+
+def assess_flood_risk(stations,Med = False,Low = False):
+	update_water_levels(stations)
+	set_relative_water_levels(stations)
+	HighThreshold = 1.1
+	MedTheshold = 1.0
+	LowThreshold = 0.8
+	HighRiskTowns = []
+	MedRiskTowns = []
+	LowRiskTowns = []
+	for station in stations:
+		if station.relative_level >= HighThreshold:
+			HighRiskTowns.append((station.town,"High Risk"))
+		elif station.relative_level >= MedTheshold:
+			MedRiskTowns.append((station.town,"Medium Risk"))
+		elif station.relative_level >= LowThreshold:
+			LowRiskTowns.append((station.town,"Low Risk"))
+	HighRiskTowns = sorted_by_key(HighRiskTowns,0,True)
+	MedRiskTowns = sorted_by_key(MedRiskTowns,0,True)
+	LowRiskTowns = sorted_by_key(LowRiskTowns,0,True)
+	Towns =  HighRiskTowns+MedRiskTowns+LowRiskTowns
+	return Towns
