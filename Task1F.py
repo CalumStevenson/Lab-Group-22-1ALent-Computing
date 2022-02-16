@@ -1,4 +1,3 @@
-from floodsystem import geo
 from floodsystem import stationdata
 from floodsystem import station
 def run():
